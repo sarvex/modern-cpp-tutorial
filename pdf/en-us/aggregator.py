@@ -20,7 +20,5 @@ copyright: cc-by-nc-nd 4.0
             with open(chapter) as ch:
                 outfile.write('\n')
                 for line in ch:
-                    if any(keyword in line for keyword in ignores):
-                        continue
-                    else:
+                    if all(keyword not in line for keyword in ignores):
                         outfile.write(line)

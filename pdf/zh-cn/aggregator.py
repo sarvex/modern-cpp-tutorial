@@ -21,7 +21,5 @@ with io.open('modern-cpp-tutorial.md', 'w', encoding='utf8') as outfile:
             with open(chapter) as ch:
                 outfile.write('\n')
                 for line in ch:
-                    if any(keyword in line for keyword in ignores):
-                        continue
-                    else:
+                    if all(keyword not in line for keyword in ignores):
                         outfile.write(line)

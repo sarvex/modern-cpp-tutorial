@@ -22,11 +22,9 @@ for index, source in enumerate(source_dir):
         dst_filepath = destination_dir[index] + chapter[:-3]
         os.makedirs(dst_filepath)
         print(dst_filepath)
-        print(dst_filepath + '/index.md')
+        print(f'{dst_filepath}/index.md')
         with open(source+chapter, 'r', encoding='utf-8') as source_file:
-            with open(dst_filepath + '/index.md', 'w', encoding='utf-8') as output_file:
+            with open(f'{dst_filepath}/index.md', 'w', encoding='utf-8') as output_file:
                 for line in source_file:
-                    if any(keyword in line for keyword in ignores):
-                        continue
-                    else:
+                    if all(keyword not in line for keyword in ignores):
                         output_file.write(re.sub(r'(./)(.*?)(.md)', r'../\2/index.html', line))

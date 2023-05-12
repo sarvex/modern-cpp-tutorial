@@ -8,12 +8,10 @@ chapters = ['00-preface.md', '01-intro.md',  '02-usability.md', '03-runtime.md',
 ignores = ['TOC', 'Table of Content', 'License', 'license']
 
 for chapter in chapters:
-    with open(chapter+'.markdown', 'w') as outfile:
+    with open(f'{chapter}.markdown', 'w') as outfile:
         if os.path.isfile(chapter):
             with open(chapter) as ch:
                 outfile.write('\n')
                 for line in ch:
-                    if any(keyword in line for keyword in ignores):
-                        continue
-                    else:
+                    if all(keyword not in line for keyword in ignores):
                         outfile.write(line)
